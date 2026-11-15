@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Cuánto vale? - Comparador</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #101827;
+  color: white;
+  text-align: center;
+  padding: 30px 15px;
+}
+main {
+  max-width: 650px;
+  margin: auto;
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 15px;
+}
+h1 { color: #38bdf8; }
+input, button {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: 8px;
+  font-size: 16px;
+}
+button {
+  background: #0ea5e9;
+  color: white;
+  border: 0;
+  cursor: pointer;
+}
+a { color: #38bdf8; }
+</style>
+</head>
+<body>
+<main>
+<h1>¿CUÁNTO VALE?</h1>
+<h2>Comparador de precios de segunda mano</h2>
+<p>Descubre cuánto podría valer tu producto.</p>
+
+<input id="producto" placeholder="¿Qué producto quieres valorar?">
+<input id="marca" placeholder="Marca y modelo">
+<select id="estado">
+<option value="muy bueno">Muy buen estado</option>
+<option value="bueno">Buen estado</option>
+<option value="usado">Usado</option>
+</select>
+<button onclick="consultar()">Consultar producto</button>
+<div id="resultado"></div>
+</main>
+
+<script>
+function consultar() {
+ const producto = document.getElementById("producto").value.trim();
+ const marca = document.getElementById("marca").value.trim();
+ const estado = document.getElementById("estado").value;
+ if (!producto) {
+  document.getElementById("resultado").innerText = "Escribe un producto.";
+  return;
+ }
+ document.getElementById("resultado").innerHTML =
+  "<h3>Producto introducido</h3><p>" +
+  producto + " " + marca + "</p><p>Estado: " + estado +
+  "</p><p>Esta versión todavía no consulta precios reales. Estamos preparando el comparador.</p>";
+}
+</script>
+</body>
+</html>
