@@ -87,4 +87,49 @@ form.addEventListener('submit',e=>{
 });
 </script>
 </body>
+  <div style="margin:20px auto; max-width:650px; text-align:center;">
+  <button onclick="buscarWallapop()">
+    Buscar en Wallapop
+  </button>
+
+  <button onclick="buscarMilanuncios()">
+    Buscar en Milanuncios
+  </button>
+</div>
+
+<script>
+function obtenerBusqueda() {
+  const producto = document.getElementById("producto").value.trim();
+  const marca = document.getElementById("marca").value.trim();
+
+  if (!producto) {
+    alert("Escribe primero el producto.");
+    return null;
+  }
+
+  return (producto + " " + marca).trim();
+}
+
+function buscarWallapop() {
+  const busqueda = obtenerBusqueda();
+  if (!busqueda) return;
+
+  window.open(
+    "https://es.wallapop.com/app/search?keywords=" +
+    encodeURIComponent(busqueda),
+    "_blank"
+  );
+}
+
+function buscarMilanuncios() {
+  const busqueda = obtenerBusqueda();
+  if (!busqueda) return;
+
+  window.open(
+    "https://www.milanuncios.com/anuncios/" +
+    encodeURIComponent(busqueda.replace(/\s+/g, "-")) + ".htm",
+    "_blank"
+  );
+}
+</script>
 </html>
