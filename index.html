@@ -2,179 +2,561 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>¿CUÁNTO VALE? - Comparador de segunda mano</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101827">
+<title>¿Cuánto Vale? — Comparador de segunda mano</title>
 
 <style>
-* { box-sizing: border-box; }
+:root {
+  --bg: #f3f5f8;
+  --ink: #172033;
+  --muted: #667085;
+  --line: #e5e9f0;
+  --brand: #5b5ce2;
+  --brand2: #4546c8;
+  --card: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
 
 body {
-  font-family: Arial, sans-serif;
-  background: #101827;
-  color: white;
-  text-align: center;
-  padding: 25px 15px;
   margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.5 Arial, sans-serif;
+}
+
+header {
+  background: #101827;
+  color: #fff;
+  padding: 22px 20px 70px;
+}
+
+.top {
+  max-width: 1080px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.logo {
+  font-weight: 850;
+  font-size: 21px;
+}
+
+.logo span {
+  color: #a8a8ff;
+}
+
+.tag {
+  font-size: 12px;
+  color: #c7cce0;
+  border: 1px solid #39445a;
+  padding: 6px 10px;
+  border-radius: 99px;
+}
+
+.hero {
+  max-width: 1080px;
+  margin: 34px auto 0;
+}
+
+.hero h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.08;
+  margin: 0 0 12px;
+  max-width: 700px;
+}
+
+.hero p {
+  color: #c8d0df;
+  margin: 0;
+  max-width: 620px;
 }
 
 main {
-  max-width: 650px;
-  margin: auto;
-  background: #1e293b;
-  padding: 25px;
-  border-radius: 16px;
+  max-width: 1080px;
+  margin: -42px auto 50px;
+  padding: 0 18px;
 }
 
-h1 {
-  color: #38bdf8;
-  font-size: 34px;
+.layout {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 20px;
+  align-items: start;
 }
 
-p { line-height: 1.5; }
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 12px 34px #1720330c;
+}
 
-input, select, button {
+.panel h2 {
+  font-size: 20px;
+  margin: 0 0 5px;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 0 22px;
+}
+
+label {
   display: block;
-  width: 100%;
-  padding: 14px;
-  margin: 12px 0;
-  border-radius: 8px;
-  font-size: 16px;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0 0 7px;
+}
+
+.field {
+  margin-bottom: 17px;
 }
 
 input, select {
-  border: 1px solid #64748b;
-  background: white;
-  color: #111827;
+  width: 100%;
+  border: 1px solid #d8deea;
+  background: #fff;
+  border-radius: 11px;
+  padding: 13px 14px;
+  font: inherit;
+  color: var(--ink);
 }
 
-button {
-  border: none;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
+input:focus, select:focus {
+  border-color: var(--brand);
+  outline: none;
+  box-shadow: 0 0 0 3px #5b5ce21c;
 }
 
-.consultar { background: #0ea5e9; }
-.wallapop { background: #13a99a; }
-.milanuncios { background: #f07800; }
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+}
 
-#resultado {
-  margin-top: 22px;
-  padding: 18px;
-  background: #334155;
+.hint {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.btn {
+  width: 100%;
+  border: 0;
   border-radius: 12px;
-  display: none;
+  background: var(--brand);
+  color: white;
+  padding: 14px 18px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
 }
 
-.precio {
-  color: #38bdf8;
-  font-size: 30px;
-  font-weight: bold;
+.btn:hover {
+  background: var(--brand2);
 }
 
-.nota {
-  color: #cbd5e1;
+.market-btn {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  color: white;
+  padding: 14px 18px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.wallapop {
+  background: #13a99a;
+}
+
+.milanuncios {
+  background: #f07800;
+}
+
+.market-btn:hover {
+  opacity: .88;
+}
+
+.result {
+  position: sticky;
+  top: 18px;
+  overflow: hidden;
+}
+
+.result-top {
+  background: linear-gradient(135deg, #292b74, #5b5ce2);
+  color: white;
+  padding: 24px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  color: #d7d7ff;
+  font-weight: 750;
+}
+
+.price {
+  font-size: 48px;
+  font-weight: 850;
+  line-height: 1.15;
+  margin: 7px 0;
+}
+
+.result-top p {
+  color: #e1e2ff;
   font-size: 13px;
+  margin: 0;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.price-row span:first-child {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.price-row strong {
+  font-size: 15px;
+}
+
+.empty {
+  border: 1px dashed #cbd2df;
+  border-radius: 14px;
+  padding: 28px 18px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.empty .emoji {
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+
+.note {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 17px 0 0;
+}
+
+.pill {
+  display: inline-block;
+  background: #e9f7f0;
+  color: #14734f;
+  padding: 5px 9px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 750;
+  margin-top: 12px;
+}
+
+footer {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 18px 32px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+@media(max-width:760px) {
+  header {
+    padding-bottom: 62px;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .result {
+    position: static;
+  }
+
+  .panel {
+    padding: 19px;
+  }
+
+  .hero {
+    margin-top: 28px;
+  }
+
+  .two {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(max-width:420px) {
+  .two {
+    grid-template-columns: 1fr;
+  }
+
+  .price {
+    font-size: 42px;
+  }
 }
 </style>
 </head>
 
 <body>
+
+<header>
+  <div class="top">
+    <div class="logo">¿CUÁNTO <span>VALE?</span></div>
+    <div class="tag">ESTIMADOR GRATUITO</div>
+  </div>
+
+  <section class="hero">
+    <h1>Antes de venderlo, descubre cuánto podría valer.</h1>
+    <p>Calcula un precio orientativo para tus objetos de segunda mano y compara en otras plataformas.</p>
+  </section>
+</header>
+
 <main>
+<div class="layout">
 
-<h1>¿CUÁNTO VALE?</h1>
-<h2>Calcula el precio de tu producto</h2>
-<p>Descubre cuánto podrías pedir por tus artículos de segunda mano.</p>
+  <section class="panel">
+    <h2>Calcula el precio de tu artículo</h2>
+    <p class="sub">Completa los datos para obtener una estimación inicial.</p>
 
-<input id="producto" type="text"
-placeholder="Producto (ejemplo: teléfono móvil)">
+    <form id="form">
 
-<input id="marca" type="text"
-placeholder="Marca y modelo (ejemplo: iPhone 13)">
+      <div class="field">
+        <label for="product">¿Qué quieres vender?</label>
+        <input id="product"
+          placeholder="Ej. iPhone 13, bicicleta, sofá..."
+          maxlength="80" required>
+      </div>
 
-<label for="precioOriginal">Precio aproximado cuando era nuevo (€)</label>
-<input id="precioOriginal" type="number" min="1"
-placeholder="Ejemplo: 800">
+      <div class="two">
+        <div class="field">
+          <label for="category">Categoría</label>
+          <select id="category">
+            <option value="electronics">Electrónica</option>
+            <option value="phones">Móviles</option>
+            <option value="fashion">Ropa y calzado</option>
+            <option value="home">Hogar y muebles</option>
+            <option value="gaming">Videojuegos</option>
+            <option value="sports">Deporte</option>
+            <option value="other">Otros</option>
+          </select>
+        </div>
 
-<select id="estado">
-<option value="0.80">Como nuevo</option>
-<option value="0.65" selected>Muy buen estado</option>
-<option value="0.50">Buen estado</option>
-<option value="0.35">Bastante usado</option>
-<option value="0.20">Para reparar</option>
-</select>
+        <div class="field">
+          <label for="condition">Estado</label>
+          <select id="condition">
+            <option value="0.75">Como nuevo</option>
+            <option value="0.60" selected>Buen estado</option>
+            <option value="0.42">Usado / marcas</option>
+            <option value="0.22">Necesita reparación</option>
+          </select>
+        </div>
+      </div>
 
-<button type="button" class="consultar" onclick="calcularPrecio()">
-CALCULAR PRECIO ESTIMADO
-</button>
+      <div class="two">
+        <div class="field">
+          <label for="original">Precio nuevo (€)</label>
+          <input id="original" type="number"
+            min="1" max="1000000" step="0.01"
+            placeholder="Ej. 800" required>
+        </div>
 
-<div id="resultado">
-<h3>Tu precio estimado de venta</h3>
-<div class="precio" id="precioEstimado"></div>
-<p id="detalle"></p>
-<p class="nota">
-Estimación orientativa basada en el precio nuevo y el estado.
-No representa una media de anuncios reales.
-</p>
+        <div class="field">
+          <label for="age">Antigüedad</label>
+          <select id="age">
+            <option value="0.95">Menos de 6 meses</option>
+            <option value="0.85">6–12 meses</option>
+            <option value="0.72" selected>1–2 años</option>
+            <option value="0.58">2–4 años</option>
+            <option value="0.42">Más de 4 años</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="extras">
+          ¿Conservas caja, accesorios o factura?
+        </label>
+        <select id="extras">
+          <option value="1.08">Sí, está completo</option>
+          <option value="1" selected>Solo algunos</option>
+          <option value="0.92">No</option>
+        </select>
+        <div class="hint">
+          Los accesorios pueden influir en el interés de los compradores.
+        </div>
+      </div>
+
+      <button class="btn" type="submit">
+        CALCULAR PRECIO ORIENTATIVO
+      </button>
+
+      <button class="market-btn wallapop"
+        type="button" onclick="buscarWallapop()">
+        BUSCAR EN WALLAPOP
+      </button>
+
+      <button class="market-btn milanuncios"
+        type="button" onclick="buscarMilanuncios()">
+        BUSCAR EN MILANUNCIOS
+      </button>
+
+    </form>
+  </section>
+
+  <aside class="panel result" aria-live="polite">
+    <h2>Tu estimación</h2>
+    <p class="sub">El resultado aparecerá aquí.</p>
+
+    <div id="empty" class="empty">
+      <div class="emoji">🧮</div>
+      <strong>¿Listo para calcular?</strong>
+      <br>
+      <span>Introduce los datos del artículo y pulsa el botón.</span>
+    </div>
+
+    <div id="output" hidden>
+
+      <div class="result-top">
+        <div class="eyebrow">Precio recomendado de anuncio</div>
+        <div class="price" id="recommended">—</div>
+        <p id="summary">Estimación para tu artículo</p>
+        <div class="pill">Estimación orientativa</div>
+      </div>
+
+      <div class="price-row">
+        <span>Para vender más rápido</span>
+        <strong id="quick">—</strong>
+      </div>
+
+      <div class="price-row">
+        <span>Precio para negociar</span>
+        <strong id="negotiate">—</strong>
+      </div>
+
+      <div class="price-row">
+        <span>Rango orientativo</span>
+        <strong id="range">—</strong>
+      </div>
+
+      <p class="note">
+        Este cálculo usa reglas generales según los datos introducidos.
+        No consulta anuncios ni ventas reales y no garantiza el precio
+        de mercado. Compara artículos equivalentes antes de publicar.
+      </p>
+    </div>
+  </aside>
+
 </div>
-
-<button type="button" class="wallapop" onclick="buscarWallapop()">
-BUSCAR PRODUCTOS EN WALLAPOP
-</button>
-
-<button type="button" class="milanuncios" onclick="buscarMilanuncios()">
-BUSCAR PRODUCTOS EN MILANUNCIOS
-</button>
-
 </main>
 
+<footer>
+  ¿CUÁNTO VALE? · Herramienta gratuita de estimación.
+  Los resultados son orientativos y no constituyen una tasación profesional.
+</footer>
+
 <script>
-function obtenerBusqueda() {
-  const producto = document.getElementById("producto").value.trim();
-  const marca = document.getElementById("marca").value.trim();
 
-  if (!producto) {
-    alert("Escribe primero el nombre del producto.");
-    return null;
-  }
+const form = document.getElementById('form');
 
-  return (producto + " " + marca).trim();
-}
+const euro = n => new Intl.NumberFormat('es-ES', {
+  style: 'currency',
+  currency: 'EUR',
+  maximumFractionDigits: 0
+}).format(n);
 
-function calcularPrecio() {
-  const busqueda = obtenerBusqueda();
-  if (!busqueda) return;
 
-  const precioNuevo = Number(
-    document.getElementById("precioOriginal").value
-  );
+// MODELO ORIGINAL DE ESTIMACIÓN DE PRECIO
 
-  const porcentaje = Number(
-    document.getElementById("estado").value
-  );
+form.addEventListener('submit', e => {
+  e.preventDefault();
 
-  if (!precioNuevo || precioNuevo <= 0) {
-    alert("Introduce el precio aproximado del producto cuando era nuevo.");
+  const name = document.getElementById('product').value.trim();
+  const original = Number(document.getElementById('original').value);
+
+  if (!name || !Number.isFinite(original) || original <= 0) {
+    alert("Introduce el producto y su precio nuevo.");
     return;
   }
 
-  const estimacion = precioNuevo * porcentaje;
-  const minimo = estimacion * 0.90;
-  const maximo = estimacion * 1.10;
+  const category = document.getElementById('category').value;
+  const condition = Number(document.getElementById('condition').value);
+  const age = Number(document.getElementById('age').value);
+  const extras = Number(document.getElementById('extras').value);
 
-  document.getElementById("precioEstimado").textContent =
-    estimacion.toFixed(2) + " €";
+  const categoryFactor = {
+    phones: .92,
+    electronics: .82,
+    fashion: .55,
+    home: .62,
+    gaming: .78,
+    sports: .65,
+    other: .60
+  }[category];
 
-  document.getElementById("detalle").textContent =
-    "Rango orientativo: " + minimo.toFixed(2) +
-    " € – " + maximo.toFixed(2) + " €.";
+  let estimate = original * condition * age * extras * categoryFactor;
 
-  document.getElementById("resultado").style.display = "block";
+  estimate = Math.max(5, Math.round(estimate / 5) * 5);
+
+  const quick = Math.max(5, Math.round(estimate * .85 / 5) * 5);
+  const negotiate = Math.round(estimate * 1.12 / 5) * 5;
+  const low = Math.max(5, Math.round(estimate * .85 / 5) * 5);
+  const high = Math.round(estimate * 1.15 / 5) * 5;
+
+  document.getElementById('recommended').textContent = euro(estimate);
+  document.getElementById('quick').textContent = euro(quick);
+  document.getElementById('negotiate').textContent = euro(negotiate);
+  document.getElementById('range').textContent =
+    euro(low) + ' – ' + euro(high);
+
+  document.getElementById('summary').textContent =
+    name + ' · ' +
+    document.getElementById('condition').selectedOptions[0].text;
+
+  document.getElementById('empty').hidden = true;
+  document.getElementById('output').hidden = false;
+});
+
+
+// BUSQUEDA EN WALLAPOP
+
+function obtenerBusqueda() {
+  const producto = document.getElementById('product').value.trim();
+
+  if (!producto) {
+    alert("Escribe primero el producto que quieres buscar.");
+    return null;
+  }
+
+  return producto;
 }
 
 function buscarWallapop() {
   const busqueda = obtenerBusqueda();
+
   if (!busqueda) return;
 
   window.location.href =
@@ -182,14 +564,20 @@ function buscarWallapop() {
     encodeURIComponent(busqueda);
 }
 
+
+// BUSQUEDA EN MILANUNCIOS
+
 function buscarMilanuncios() {
   const busqueda = obtenerBusqueda();
+
   if (!busqueda) return;
 
   window.location.href =
     "https://www.milanuncios.com/anuncios/" +
-    encodeURIComponent(busqueda.replace(/\s+/g, "-")) + ".htm";
+    encodeURIComponent(busqueda.replace(/\s+/g, "-")) +
+    ".htm";
 }
+
 </script>
 
 </body>
